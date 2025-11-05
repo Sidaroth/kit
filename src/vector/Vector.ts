@@ -357,4 +357,30 @@ export class Vector implements Position {
 
         return vector1.angleBetween2d(vector2);
     }
+
+    /**
+     * Computes the Z-component of the 2D cross product formed by three points (a, b, c).
+     * 
+     * Conceptually, this returns the signed area of the parallelogram spanned by
+     * the vectors (b - a) and (c - b).
+     *
+     * - Positive → points make a left turn (counter-clockwise)
+     * - Negative → points make a right turn (clockwise)
+     * - Zero → points are collinear
+     *
+     * This value is also equivalent to the determinant of the 2×2 matrix
+     * formed by the edge vectors.
+     *
+     * @param a - First point (previous vertex)
+     * @param b - Second point (current vertex)
+     * @param c - Third point (next vertex)
+     * @returns The signed Z-component of the 2D cross product.
+     */
+    static cross2dFromPoints(a: Point, b: Point, c: Point): number {
+        const abx = b.x - a.x;
+        const aby = b.y - a.y;
+        const bcx = c.x - b.x;
+        const bcy = c.y - b.y;
+        return (abx * bcy) - (aby * bcx);
+    }
 }
