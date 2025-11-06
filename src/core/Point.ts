@@ -225,6 +225,7 @@ export class Point {
 
     /**
      * Calculates the angle between this and another point (in radians) in range (-π, π].
+     * @note the angle is measured assuming a screen coordinate system (Y increases downwards - 0, 0 is top left).
      * @param point - The point to calculate the angle to.
      * @returns The angle between the two points in radians.
      */
@@ -357,6 +358,6 @@ export class Point {
 
     /** @returns A string representation of the point. */
     toString() {
-        return `Point(x: ${this.x}, y: ${this.y})`;
+        return `Point(${this.x}, ${this.y})`;
     }
 }
