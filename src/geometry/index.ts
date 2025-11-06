@@ -1,4 +1,4 @@
-export { Rect, type Size } from './Rect';
+export { Rect } from './Rect';
 export { Circle } from './Circle';
 export { Line } from './Line';
 export { Polygon } from './Polygon';
