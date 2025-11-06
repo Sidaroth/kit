@@ -1,4 +1,4 @@
-export { clamp } from './clamp';
+export { clamp, lerp, lerpClamped, inverseLerp, remap } from './scalar';
 export {
     degreesToRadians,
     radiansToDegrees,
