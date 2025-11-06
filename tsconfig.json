@@ -1,25 +1,17 @@
 {
     "compilerOptions": {
-        /* Output */
         "outDir": "dist",
         "target": "ES2022",
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "lib": [
-            "ES2022",
-            "DOM"
-        ],
-        "types": [
-            "vitest/globals"
-        ],
-        /* Interop + Module Behavior */
+        "lib": ["ES2022", "DOM"],
+        "types": ["vitest/globals"],
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "isolatedModules": true,
-        /* Type Checking */
         "strict": true,
         "noImplicitAny": true,
         "strictPropertyInitialization": true,
@@ -28,33 +20,17 @@
         "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
-        /* Source Mapping & Declarations */
         "declaration": true,
         "declarationMap": true,
         "sourceMap": true,
-        /* Paths & Base URL */
         "baseUrl": "./src",
         "paths": {
-            "@core/*": [
-                "core/*"
-            ],
-            "@shapes/*": [
-                "shapes/*"
-            ],
-            "@physics/*": [
-                "physics/*"
-            ],
-            "@utils/*": [
-                "utils/*"
-            ]
+            "@core/*": ["core/*"],
+            "@physics/*": ["physics/*"],
+            "@shapes/*": ["shapes/*"],
+            "@utils/*": ["utils/*"]
         }
     },
-    "include": [
-        "src",
-        "tests"
-    ],
-    "exclude": [
-        "dist",
-        "node_modules"
-    ]
+    "include": ["src", "tests"],
+    "exclude": ["dist", "node_modules"]
 }
