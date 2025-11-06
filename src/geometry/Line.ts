@@ -20,11 +20,24 @@ export class Line extends Geometry {
 
     private _angle: number = 0;
 
-    constructor(p1: Point | Vector, p2: Point | Vector) {
+    /**
+     * @param origin - The origin point.
+     * @param end - The end point.
+     */
+    constructor(origin: Point, end: Point);
+
+    /**
+     * @param origin - The origin vector.
+     * @param end - The end vector.
+     */
+    constructor(origin: Vector, end: Vector);
+    constructor(origin: Point | Vector, end: Point | Vector) {
         super();
 
-        this._origin.copyFrom(p1 instanceof Vector ? p1.asPoint() : p1);
-        this._end.copyFrom(p2 instanceof Vector ? p2.asPoint() : p2);
+        this._origin.copyFrom(
+            origin instanceof Vector ? origin.asPoint() : origin,
+        );
+        this._end.copyFrom(end instanceof Vector ? end.asPoint() : end);
         this.refresh();
     }
 
