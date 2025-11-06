@@ -21,6 +21,11 @@ export class Circle extends Geometry {
 
     private _squaredRadius: number = 0;
 
+    /**
+     * Creates a new Circle.
+     * @param position - The center point of the circle.
+     * @param radius - The radius of the circle.
+     */
     constructor(position: Point, radius: number = 0) {
         super();
 
@@ -29,96 +34,72 @@ export class Circle extends Geometry {
         this.refresh();
     }
 
-    /**
-     * @returns The circle's position.
-     */
+    /** @returns The circle's position. */
     get position() {
         this.ensureRefreshed();
         return this._position;
     }
 
-    /**
-     * @returns The circle's X position.
-     */
+    /** @returns The circle's X position. */
     get x() {
         this.ensureRefreshed();
         return this._position.x;
     }
 
-    /**
-     * @returns The circle's Y position.
-     */
+    /** @returns The circle's Y position. */
     get y() {
         this.ensureRefreshed();
         return this._position.y;
     }
 
-    /**
-     * @returns The circle's radius.
-     */
+    /** @returns The circle's radius. */
     get radius() {
         this.ensureRefreshed();
         return this._radius;
     }
 
-    /**
-     * @returns The circle's squared radius.
-     */
+    /** @returns The circle's squared radius. */
     get squaredRadius() {
         this.ensureRefreshed();
         return this._squaredRadius;
     }
 
-    /**
-     * @returns The circle's circumference.
-     */
+    /** @returns The circle's circumference. */
     get circumference() {
         this.ensureRefreshed();
         return this._circumference;
     }
 
-    /**
-     * @returns The circle's area.
-     */
+    /** @returns The circle's area. */
     get area() {
         this.ensureRefreshed();
         return this._area;
     }
 
-    /**
-     * @returns The circle's Axis-Aligned Bounding Box (AABB).
-     */
+    /** @returns The circle's Axis-Aligned Bounding Box (AABB). */
     get aabb() {
         this.ensureRefreshed();
         return this._aabb;
     }
 
-    /**
-     * Calculates the Axis-Aligned Bounding Box (AABB) of the circle.
-     */
+    /** Calculates the Axis-Aligned Bounding Box (AABB) of the circle. */
     private calculateAABB() {
         const { x, y } = this._position;
         const r = this._radius;
         this._aabb = new Rect(x - r, y - r, r * 2, r * 2);
     }
 
-    /**
-     * Calculates the area of the circle.
-     */
+    /** Calculates the area of the circle. */
     private calculateArea() {
         this._area = Math.PI * this._radius * this._radius;
     }
 
-    /**
-     * Calculates the circumference of the circle.
-     */
+    /** Calculates the circumference of the circle. */
     private calculateCircumference() {
         this._circumference = 2 * Math.PI * this._radius;
     }
 
-    /**
-     * Calculates the squared radius of the circle.
-     */
+    /** Calculates the squared radius of the circle. */
     private calculateSquaredRadius() {
         this._squaredRadius = this._radius * this._radius;
     }
@@ -176,16 +157,12 @@ export class Circle extends Geometry {
         return this.markDirty();
     }
 
-    /**
-     * @returns A deep copy of the circle.
-     */
+    /** @returns A deep copy of the circle. */
     clone() {
         return new Circle(this._position.clone(), this._radius);
     }
 
-    /**
-     * @returns A string representation of the circle.
-     */
+    /** @returns A string representation of the circle. */
     override toString() {
         return `Circle(center: ${this._position.toString()}, radius: ${this._radius.toFixed(2)})`;
     }
