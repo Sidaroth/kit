@@ -1,5 +1,4 @@
-import { Point } from '../core';
-import { Vector } from '../vector';
+import { Point, Vector } from '../core';
 import { Rect } from './Rect';
 import { Geometry } from './Geometry';
 
@@ -30,7 +29,11 @@ export class Polygon extends Geometry {
 
     private _perimeter: number = 0;
 
-    constructor(vertices: Point[]) {
+    /**
+     * Creates a new Polygon.
+     * @param vertices - The vertices - must be at least 3.
+     */
+    constructor(vertices: readonly Point[]) {
         super();
 
         if (vertices.length < 3) {
@@ -45,66 +48,50 @@ export class Polygon extends Geometry {
     }
 
     /**
-     * Returns the polygon's Axis-Aligned Bounding Box (AABB).
-     *
-     * @returns The polygon's AABB.
+     * @returns The polygon's Axis-Aligned Bounding Box (AABB).
      */
     get aabb() {
         this.ensureRefreshed();
         return this._aabb;
     }
 
-    /**
-     * @returns The polygon's edges.
-     */
+    /** @returns The polygon's edges. */
     get edges() {
         this.ensureRefreshed();
         return this._edges;
     }
 
-    /**
-     * @returns The polygon's centroid.
-     */
+    /** @returns The polygon's centroid. */
     get centroid() {
         this.ensureRefreshed();
         return this._centroid;
     }
 
-    /**
-     * @returns Whether the polygon is concave.
-     */
+    /** @returns Whether the polygon is concave. */
     get isConcave() {
         this.ensureRefreshed();
         return this._isConcave;
     }
 
-    /**
-     * @returns The polygon's area.
-     */
+    /** @returns The polygon's area. */
     get area() {
         this.ensureRefreshed();
         return this._area;
     }
 
-    /**
-     * @returns The polygon's perimeter.
-     */
+    /** @returns The polygon's perimeter. */
     get perimeter() {
         this.ensureRefreshed();
         return this._perimeter;
     }
 
-    /**
-     * @returns The polygon's position.
-     */
+    /** @returns The polygon's position. */
     get position() {
         this.ensureRefreshed();
         return this._position;
     }
 
-    /**
-     * @returns The polygon's vertices.
-     */
+    /** @returns The polygon's vertices. */
     get vertices() {
         this.ensureRefreshed();
 
@@ -113,22 +100,30 @@ export class Polygon extends Geometry {
     }
 
     /**
-     * Technically this could just invalidate the prev. cache, so that
-     * it only recalculates on actual get calls where cache is invalid.
+     * Traverses the polygon's vertices and calculates the edges.
      * We define it as next - current to ensure the edges points along the polygon's perimeter traversal direction.
-     * This ensures that normals point outward from the polygon.
      */
     private updateEdges() {
-        const edges: Vector[] = [];
-        for (let index = 0; index < this._vertices.length; index += 1) {
-            const current = this._vertices[index];
-            // Next - wraps around to the first vertex if we're at the last.
-            const next = this._vertices[(index + 1) % this._vertices.length];
-            const edge = Vector.sub(next, current);
-            edges.push(edge);
+        const vertices = this._vertices;
+        const length = vertices.length;
+        const edges = this._edges;
+
+        // Ensure the edges array is the same length as the vertices array.
+        // If there are discrepancies, we need to resize the array and initialize new vectors.
+        if (edges.length !== length) {
+            edges.length = length;
+            for (let i = 0; i < length; i += 1) {
+                edges[i] = new Vector();
+            }
         }
 
-        this._edges = edges;
+        // Once we can guarantee the edges array is the correct size we can set the edges in a loop - in place.
+        // For updates that only change vertex properties and not the number of vertices,
+        // this is much more efficient than creating a new array and copying the values.
+        for (let i = 0; i < length; i += 1) {
+            const next = vertices[(i + 1) % length];
+            edges[i].set(next).sub(vertices[i]);
+        }
     }
 
     /**
@@ -317,11 +312,7 @@ export class Polygon extends Geometry {
         this._area = area * 0.5;
     }
 
-    /**
-     * Calculates the perimeter of the polygon.
-     *
-     * @returns Updates {@link this.perimeter} with the new perimeter.
-     */
+    /** Calculates and caches the perimeter of the polygon. */
     private calculatePerimeter() {
         let perimeter = 0;
         const n = this._vertices.length;
@@ -336,33 +327,46 @@ export class Polygon extends Geometry {
 
     /**
      * Sets the polygon’s position to a new point.
-     *
-     * @param posX - The new X position.
-     * @param posY - The new Y position.
-     * @returns Updates the polygon’s position and derived properties.
+     * @param x - The x position.
+     * @param y - The y position.
+     * @returns The polygon instance.
      */
-    setPosition(posX: number, posY: number) {
-        const pos = new Point(posX, posY);
+    setPosition(x: number, y: number): this;
 
-        const currentPos = this._position;
+    /**
+     * Sets the polygon’s position to a new point.
+     * @param position - The position.
+     * @returns The polygon instance.
+     */
+    setPosition(position: Point): this;
+
+    // internal implementation
+    setPosition(x: number | Point, y?: number): this {
+        if (x instanceof Point) {
+            this._position.copyFrom(x);
+            return this.markDirty();
+        }
+
+        const pos = new Point(x, y);
+
         // We want to move each vertex in the polygon by the difference between the new position and the old position.
-        const change = Point.subtract(pos, currentPos);
+        const change = Point.subtract(pos, this._position);
         this.translate(change);
 
         // Update the position of the polygon - defined as the first vertex.
-        const newPosition = this._vertices[0];
-        this._position = newPosition;
+        this._position.copyFrom(this._vertices[0]);
         return this.markDirty();
     }
 
     /**
      * Rotates the polygon around a given pivot point by the specified angle.
+     * @note the rotation happens at vertex level - in place.
      *
      * @param angle - Rotation in radians.
-     * @param pivot - Point to rotate around. Defaults to the polygon’s first vertex.
-     * @returns Updates vertex positions and recalculates edges and derived properties.
+     * @param pivot - Point to rotate around. Defaults to the polygons centroid.
+     * @returns The polygon instance.
      */
-    rotateBy(angle: number, pivot = this._vertices[0]) {
+    rotateBy(angle: number, pivot = this._centroid) {
         // Rotate each vertex around the pivot point.
         for (const vertex of this._vertices) {
             vertex.rotate(angle, pivot);
@@ -450,31 +454,48 @@ export class Polygon extends Geometry {
         return this.markDirty();
     }
 
-    addVertex(vertex: Point) {
+    /**
+     * Adds a vertex to the polygon.
+     * @param vertex - The vertex to add.
+     * @returns The polygon instance.
+     */
+    addVertex(vertex: Point): this {
         this._vertices.push(vertex);
         return this.markDirty();
     }
 
-    removeVertex(index: number) {
+    /**
+     * Removes a vertex at a given index.
+     * @param index - The index of the vertex to remove.
+     * @returns The polygon instance.
+     */
+    removeVertex(index: number): this {
         if (this._vertices.length === 3) {
             console.warn('A polygon must always have at least 3 vertices.');
-            return;
+            return this;
         }
 
         this._vertices.splice(index, 1);
         return this.markDirty();
     }
 
+    /**
+     * Updates a vertex at a given index.
+     * @param index - The index of the vertex to update.
+     * @param vertex - The new vertex.
+     * @returns The polygon instance.
+     */
     updateVertex(index: number, vertex: Point) {
+        if (index < 0 || index >= this._vertices.length) {
+            console.warn('Invalid vertex index.');
+            return;
+        }
+
         this._vertices[index] = vertex;
         return this.markDirty();
     }
 
-    /**
-     * Creates a deep copy of the polygon.
-     *
-     * @returns A new polygon instance with cloned vertices and identical properties.
-     */
+    /** @returns A deep copy of the polygon. */
     clone() {
         const clone = new Polygon(
             this._vertices.map((vertex) => vertex.clone()),
@@ -483,11 +504,7 @@ export class Polygon extends Geometry {
         return clone;
     }
 
-    /**
-     * Returns a string representation of the polygon for debugging.
-     *
-     * @returns A string listing vertex coordinates.
-     */
+    /** @returns A string representation of the polygon. */
     override toString() {
         return `Polygon(vertices: ${this._vertices.map((vertex) => vertex.toString()).join(', ')})`;
     }
