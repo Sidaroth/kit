@@ -1,5 +1,5 @@
 import { Point, Vector } from '../core';
-import { LazyCacheable } from '../core/LazyCacheable';
+import { LazyCacheable } from '../core/lazyCacheable';
 
 /**
  * Represents a 2D line defined by an origin point and an end point.

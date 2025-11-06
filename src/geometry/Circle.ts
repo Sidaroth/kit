@@ -1,6 +1,6 @@
 import { Point } from '../core';
-import { LazyCacheable } from '../core/LazyCacheable';
-import { Rect } from './Rect';
+import { LazyCacheable } from '../core/lazyCacheable';
+import { Rect } from './rect';
 
 /**
  * Represents a 2D circle defined by a center point and a radius.

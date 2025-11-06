@@ -1,5 +1,5 @@
-import { LazyCacheable } from './LazyCacheable';
-import { Point } from './Point';
+import { LazyCacheable } from './lazyCacheable';
+import { Point } from './point';
 
 type VectorPolymorph = number | Vector | Point | [number, number];
 

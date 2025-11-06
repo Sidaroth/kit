@@ -1,6 +1,6 @@
 import { Point, Vector } from '../core';
-import { Rect } from './Rect';
-import { LazyCacheable } from '../core/LazyCacheable';
+import { Rect } from './rect';
+import { LazyCacheable } from '../core/lazyCacheable';
 
 /**
  * Represents a 2D polygon defined by a set of ordered vertices.

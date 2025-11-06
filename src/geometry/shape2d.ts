@@ -1,7 +1,7 @@
-import { Rect } from './Rect';
-import { Circle } from './Circle';
-import { Polygon } from './Polygon';
-import { Line } from './Line';
+import { Rect } from './rect';
+import { Circle } from './circle';
+import { Polygon } from './polygon';
+import { Line } from './line';
 
 export type Shape2d = Rect | Circle | Polygon | Line /* | Triangle | ... */;
 

@@ -1,7 +1,7 @@
 import { isSize, Point, Size } from '../core';
 import { clamp } from '../utils';
-import { Circle } from './Circle';
-import { LazyCacheable } from '../core/LazyCacheable';
+import { Circle } from './circle';
+import { LazyCacheable } from '../core/lazyCacheable';
 import { Shape2d } from './shape2d';
 
 /**

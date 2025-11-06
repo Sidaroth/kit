@@ -1,5 +1,5 @@
-export { Rect } from './Rect';
-export { Circle } from './Circle';
-export { Line } from './Line';
-export { Polygon } from './Polygon';
-export { LazyCacheable as Geometry } from '../core/LazyCacheable';
+export { Rect } from './rect';
+export { Circle } from './circle';
+export { Line } from './line';
+export { Polygon } from './polygon';
+export { LazyCacheable as Geometry } from '../core/lazyCacheable';
