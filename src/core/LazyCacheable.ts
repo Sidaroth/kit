@@ -37,4 +37,9 @@ export abstract class LazyCacheable {
         // This method is called after the internal state has been refreshed.
         // It can be overridden by subclasses to perform additional actions after the internal state has been refreshed.
     }
+
+    /** @returns Whether the internal state is dirty. Meant for tests to check state before and after operations. */
+    get isDirty(): boolean {
+        return this._isDirty;
+    }
 }
