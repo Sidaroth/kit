@@ -4,8 +4,14 @@
         "target": "ES2022",
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "lib": ["ES2022", "DOM"],
-        "types": ["vitest/globals"],
+        "lib": [
+            "ES2022",
+            "DOM"
+        ],
+        "types": [
+            "vitest/globals",
+            "node"
+        ],
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
@@ -25,12 +31,26 @@
         "sourceMap": true,
         "baseUrl": "./src",
         "paths": {
-            "@core/*": ["core/*"],
-            "@physics/*": ["physics/*"],
-            "@shapes/*": ["shapes/*"],
-            "@utils/*": ["utils/*"]
+            "@core/*": [
+                "core/*"
+            ],
+            "@physics/*": [
+                "physics/*"
+            ],
+            "@shapes/*": [
+                "shapes/*"
+            ],
+            "@utils/*": [
+                "utils/*"
+            ]
         }
     },
-    "include": ["src", "tests"],
-    "exclude": ["dist", "node_modules"]
+    "include": [
+        "src",
+        "tests"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
 }

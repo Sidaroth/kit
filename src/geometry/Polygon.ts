@@ -122,7 +122,7 @@ export class Polygon extends LazyCacheable {
         // this is much more efficient than creating a new array and copying the values.
         for (let i = 0; i < length; i += 1) {
             const next = vertices[(i + 1) % length];
-            edges[i].set(next).sub(vertices[i]);
+            edges[i].set(next).subtract(vertices[i]);
         }
     }
 
@@ -408,7 +408,7 @@ export class Polygon extends LazyCacheable {
             }
 
             // Represent the edge as a vector from currentVertex to nextVertex.
-            const edge = Vector.sub(nextVertex, currentVertex);
+            const edge = Vector.subtract(nextVertex, currentVertex);
 
             // Find normalized intersection factor along the edge (0–1 range).
             const t = (point.y - currentVertex.y) / edge.y;

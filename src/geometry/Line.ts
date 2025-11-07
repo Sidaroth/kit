@@ -94,7 +94,7 @@ export class Line extends LazyCacheable {
 
     /** Calculates the vector of the line. */
     private calculateVector() {
-        this._vector.set(this._end).sub(this._origin);
+        this._vector.set(this._end).subtract(this._origin);
     }
 
     /** Refreshes the line's properties. */
