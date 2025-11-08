@@ -1,4 +1,4 @@
-import { logMsg } from '@utils/logMsg';
+import { logWarn } from '@utils/logMsg';
 import { Point } from './point';
 import { LazyCacheable } from './lazyCacheable';
 
@@ -156,7 +156,7 @@ export class Vector extends LazyCacheable {
 
         // If _x or _y is not a number, set squaredLength to 0. Log a warning if in development.
         if (!Number.isFinite(squaredLength)) {
-            logMsg(
+            logWarn(
                 `Invalid squared length: ${squaredLength}, x: ${x}, y: ${y}`,
             );
             squaredLength = 0;
@@ -190,7 +190,7 @@ export class Vector extends LazyCacheable {
     setLength(length: number): this {
         const absLength = Math.abs(length);
         if (!Number.isFinite(absLength)) {
-            logMsg(`Invalid length: ${absLength}`);
+            logWarn(`Invalid length: ${absLength}`);
             return this.zero();
         }
 
@@ -234,7 +234,7 @@ export class Vector extends LazyCacheable {
      */
     getFixedUnit(places: number = 2): Vector {
         if (!Number.isInteger(places) || places < 0 || places > 100) {
-            logMsg(`Invalid places: ${places} - using default of 2.`);
+            logWarn(`Invalid places: ${places} - using default of 2.`);
             places = 2;
         }
 
@@ -357,7 +357,7 @@ export class Vector extends LazyCacheable {
 
         // Only reached for numeric inputs (or mangled inputs) All other polymorph types handled above.
         if (!Number.isFinite(x) || !Number.isFinite(y)) {
-            logMsg(`Invalid x or y: ${x}, ${y}`);
+            logWarn(`Invalid x or y: ${x}, ${y}`);
             return this;
         }
 
@@ -427,7 +427,7 @@ export class Vector extends LazyCacheable {
 
         // Only reached for numeric inputs (or mangled inputs) All other polymorph types handled above.
         if (!Number.isFinite(x) || !Number.isFinite(y)) {
-            logMsg(`Invalid x or y: ${x}, ${y}`);
+            logWarn(`Invalid x or y: ${x}, ${y}`);
             return this;
         }
 
@@ -494,7 +494,7 @@ export class Vector extends LazyCacheable {
 
         // Only reached for numeric inputs (or mangled inputs) All other polymorph types handled above.
         if (!Number.isFinite(x) || !Number.isFinite(y)) {
-            logMsg(`Invalid x or y: ${x}, ${y}`);
+            logWarn(`Invalid x or y: ${x}, ${y}`);
             return this;
         }
 
@@ -515,7 +515,7 @@ export class Vector extends LazyCacheable {
      */
     divide(scalar: number): this {
         if (!Number.isFinite(scalar) || scalar === 0) {
-            logMsg(`Illegal division by scalar: ${scalar}`);
+            logWarn(`Illegal division by scalar: ${scalar}`);
             return this;
         }
 
