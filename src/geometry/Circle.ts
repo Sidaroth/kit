@@ -31,7 +31,6 @@ export class Circle extends LazyCacheable {
 
         this.setPosition(position);
         this.setRadius(radius);
-        this.refresh();
     }
 
     /** @returns The circle's position. */

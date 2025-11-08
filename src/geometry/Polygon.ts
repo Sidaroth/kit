@@ -45,7 +45,6 @@ export class Polygon extends LazyCacheable {
 
         // To truly ensure immutability / cross-contamination, we need to clone the vertices.
         this._vertices = vertices.map((vertex) => vertex.clone());
-        this.refresh();
     }
 
     /**

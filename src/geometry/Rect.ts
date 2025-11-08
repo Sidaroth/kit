@@ -36,7 +36,6 @@ export class Rect extends LazyCacheable {
 
         this.setPosition(x, y);
         this.setSize(width, height);
-        this.refresh();
     }
 
     /** @returns The rectangle's Axis-Aligned Bounding Box (AABB). */

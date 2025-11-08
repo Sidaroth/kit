@@ -39,7 +39,6 @@ export class Line extends LazyCacheable {
             origin instanceof Vector ? origin.asPoint() : origin,
         );
         this._end.copyFrom(end instanceof Vector ? end.asPoint() : end);
-        this.refresh();
     }
 
     /** @returns The origin point of the line. */
