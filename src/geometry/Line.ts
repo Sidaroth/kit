@@ -42,19 +42,19 @@ export class Line extends LazyCacheable {
     }
 
     /** @returns The origin point of the line. */
-    get origin() {
+    get origin(): Readonly<Point> {
         this.ensureRefreshed();
         return this._origin;
     }
 
     /** @returns The end point of the line. */
-    get end() {
+    get end(): Readonly<Point> {
         this.ensureRefreshed();
         return this._end;
     }
 
     /** @returns A vector representation from the origin to the end of the line. */
-    get vector(): Vector {
+    get vector(): Readonly<Vector> {
         this.ensureRefreshed();
         return this._vector;
     }
@@ -66,7 +66,7 @@ export class Line extends LazyCacheable {
     }
 
     /** @returns The midpoint of the line. */
-    get midpoint(): Point {
+    get midpoint(): Readonly<Point> {
         this.ensureRefreshed();
         return this._midpoint;
     }
