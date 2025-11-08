@@ -1,5 +1,6 @@
 /* v8 ignore file -- @preserve */
-import { __DEV__ } from '../index';
+
+import { __DEV__ } from '@src/index';
 
 /**
  * Logs a message to the console if in development mode
