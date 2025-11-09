@@ -59,7 +59,7 @@ pnpm add @sidaroth/math
 * Formatting: prettier
 
 ## Roadmap
-- [ ] Add tests for all existing files
+- [X] Add tests for all existing files
 - [X] Add benchmarking
 - [ ] Add `Ray` geometry type
 - [ ] Add `Triangle` geometry type
@@ -68,4 +68,4 @@ pnpm add @sidaroth/math
 - [ ] Add physics body integration
 - [ ] Explore SIMD or WebAssembly backed math core (maybe)
 - [ ] Ensure compatability with Compute Shaders
-
+- [ ] Add fuzz tests
