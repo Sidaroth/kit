@@ -1,3 +1,5 @@
+import { __DEV__ } from '@src/index';
+
 /** Represents a possibly async method return value. */
 type MaybePromise<T> = T | Promise<T>;
 
@@ -52,7 +54,7 @@ export function timing<This, Args extends any[], Return>(
     const name = String(context.name);
 
     // If we're in production, skip wrapping to avoid overhead
-    // if (!__DEV__) return target;
+    if (!__DEV__) return target;
     const isAsync = target.constructor.name === 'AsyncFunction';
 
     if (isAsync) {
