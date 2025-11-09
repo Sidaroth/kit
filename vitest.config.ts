@@ -20,7 +20,11 @@ export default defineConfig({
         coverage: {
             provider: 'v8',
             reporter: ['text'],
-            exclude: ['dist', 'node_modules'],
+            exclude: ['dist', 'node_modules', 'tests'],
+        },
+        benchmark: {
+            outputJson: path.resolve(__dirname, 'benchmarks.json'),
+            include: ['tests/bench/**/*.bench.ts'],
         },
     },
 });
