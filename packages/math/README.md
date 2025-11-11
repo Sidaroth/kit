@@ -51,13 +51,6 @@ npm install @sidaroth/math
 pnpm add @sidaroth/math
 ```
 
-## Tooling
-* TypeScript
-* Bundler: tsup
-* Testing: vitest
-* Linting: oxlint
-* Formatting: prettier
-
 ## Roadmap
 - [X] Add tests for all existing files
 - [X] Add benchmarking

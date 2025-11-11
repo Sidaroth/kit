@@ -57,6 +57,13 @@ pnpm dev
 
 Each package defines its own build, test, and bench scripts, but they can also be orchestrated through Lerna.
 
+## Tooling
+* TypeScript
+* Bundler: tsup
+* Testing: vitest
+* Linting: oxlint
+* Formatting: prettier
+
 ## License
 
 MIT © Christian Holt (@sidaroth)
