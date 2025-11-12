@@ -1,3 +1,7 @@
+export * from './sim';
+export * from './spatial';
+export * from './utils';
+
 const env = process?.env?.NODE_ENV;
 
 // Production and test environments don't need stderr/stdout to be cluttered with dev messages.
