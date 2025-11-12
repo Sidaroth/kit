@@ -8,8 +8,8 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
     resolve: {
         alias: {
-            '@core': path.resolve(__dirname, 'src/core'),
-            '@geometry': path.resolve(__dirname, 'src/geometry'),
+            '@spatial': path.resolve(__dirname, 'src/spatial'),
+            '@sim': path.resolve(__dirname, 'src/sim'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@src': path.resolve(__dirname, 'src'),
         },

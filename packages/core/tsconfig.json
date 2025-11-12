@@ -3,11 +3,11 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@core/*": [
-                "src/core/*"
+            "@spatial/*": [
+                "src/spatial/*"
             ],
-            "@geometry/*": [
-                "src/geometry/*"
+            "@sim/*": [
+                "src/sim/*"
             ],
             "@utils/*": [
                 "src/utils/*"

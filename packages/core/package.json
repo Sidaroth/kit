@@ -23,7 +23,8 @@
         "lint": "oxlint src",
         "test:watch": "vitest watch",
         "check": "tsc --noEmit",
-        "bench": "vitest bench"
+        "bench": "vitest bench",
+        "coverage": "vitest --coverage"
     },
     "repository": {
         "type": "git",
